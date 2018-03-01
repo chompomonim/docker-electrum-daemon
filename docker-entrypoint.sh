@@ -4,15 +4,10 @@ set -ex
 # Graceful shutdown
 trap 'pkill -TERM -P1; electrum daemon stop; exit 0' SIGTERM
 
-env > env.txt
-echo "test!!!"
-
 # Let's start testnet to create directory for testnet config
 if ${ELECTRUM_TESTNET}; then
     electrum ${ELECTRUM_TESTNET} daemon start
-    echo "Starting testnet"
     electrum ${ELECTRUM_TESTNET} daemon stop
-    echo "Stoping testnet"
 fi
 
 # Set config
