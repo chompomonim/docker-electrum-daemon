@@ -2,7 +2,7 @@ ELECTRUM_VERSION = $(strip $(shell cat VERSION))
 
 GIT_COMMIT = $(strip $(shell git rev-parse --short HEAD))
 
-DOCKER_IMAGE ?= osminogin/electrum-daemon
+DOCKER_IMAGE ?= blockvis/electrum-daemon
 DOCKER_TAG = $(ELECTRUM_VERSION)
 
 # Build Docker image
@@ -25,5 +25,19 @@ docker_push:
 	docker push $(DOCKER_IMAGE):$(DOCKER_TAG)
 	docker push $(DOCKER_IMAGE):latest
 
+docker_run:
+	docker run -d --name electrum -p 7000:7000 $(DOCKER_IMAGE):$(ELECTRUM_VERSION)
+
 output:
 	@echo Docker Image: $(DOCKER_IMAGE):$(DOCKER_TAG)
+
+
+run_testnet:
+	docker run -d \
+	    -e "ELECTRUM_TESTNET=--testnet" \
+	    --name electrum-testnet \
+	    -p 7000:7000 \
+	    $(DOCKER_IMAGE):$(ELECTRUM_VERSION)
+
+	docker exec -it electrum-testnet electrum create --testnet
+	docker exec -it electrum-testnet electrum daemon load_wallet --testnet

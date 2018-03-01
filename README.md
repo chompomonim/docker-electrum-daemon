@@ -52,6 +52,22 @@ docker exec -it electrum-daemon electrum daemon status
 }
 ```
 
+### Running in testnet mode
+```bash
+docker run -d \
+    -e "ELECTRUM_TESTNET=--testnet" \
+    --name electrum-testnet \
+    -p 7000:7000 \
+    $(DOCKER_IMAGE):$(ELECTRUM_VERSION)
+
+docker exec -it electrum-testnet electrum --testnet create
+docker exec -it electrum-testnet electrum --testnet daemon load_wallet
+```
+
+Or alternatively, if you're cloning my repo, you can use `make`:
+
+    make docker_build
+    make run_testnet
 
 #### docker-compose
 
