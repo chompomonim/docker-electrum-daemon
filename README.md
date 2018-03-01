@@ -69,21 +69,6 @@ Or alternatively, if you're cloning my repo, you can use `make`:
     make docker_build
     make run_testnet
 
-#### docker-compose
-
-Take a look at `docker-compose.yml` to see how this is setup. When running in production, you can use this as a guide.
-
-```bash
-docker-compose up
-docker-compose exec electrum electrum daemon status
-docker-compose exec electrum electrum create
-docker-compose exec electrum electrum daemon load_wallet
-curl --data-binary '{"id":"1","method":"listaddresses"}' http://electrum:electrumz@localhost:7000
-```
-
-:exclamation:**Warning**:exclamation:
-
-Always link electrum daemon to containers or bind to localhost directly and not expose 7000 port for security reasons.
 
 ## API
 
