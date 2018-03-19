@@ -19,6 +19,7 @@ ENV ELECTRUM_USER electrum
 ENV ELECTRUM_PASSWORD electrumz
 ENV ELECTRUM_HOME /home/$ELECTRUM_USER
 ENV ELECTRUM_TESTNET=
+ENV ELECTRUM_XPUB=
 
 RUN adduser -D $ELECTRUM_USER && \
 	pip3 install https://download.electrum.org/${ELECTRUM_VERSION}/Electrum-${ELECTRUM_VERSION}.tar.gz

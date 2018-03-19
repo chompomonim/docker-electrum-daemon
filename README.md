@@ -56,12 +56,12 @@ docker exec -it electrum-daemon electrum daemon status
 ```bash
 docker run -d \
     -e "ELECTRUM_TESTNET=--testnet" \
+    -e "ELECTRUM_XPUB=$xpub" \
     --name electrum-testnet \
     -p 7000:7000 \
     $(DOCKER_IMAGE):$(ELECTRUM_VERSION)
 
-docker exec -it electrum-testnet electrum --testnet create
-docker exec -it electrum-testnet electrum --testnet daemon load_wallet
+docker exec -it electrum-testnet electrum --testnet daemon status
 ```
 
 Or alternatively, if you're cloning my repo, you can use `make`:
