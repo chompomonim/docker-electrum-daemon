@@ -20,6 +20,9 @@ electrum ${ELECTRUM_TESTNET} setconfig rpcport 7000
 
 # Run application
 electrum ${ELECTRUM_TESTNET} daemon start
+electrum ${ELECTRUM_TESTNET} restore ${ELECTRUM_XPUB}
+sleep 1
+electrum ${ELECTRUM_TESTNET} daemon load_wallet
 
 # Wait forever
 while true; do
